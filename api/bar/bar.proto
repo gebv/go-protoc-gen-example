@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package bar;
+
+import "api/bar/models.proto";
+
+service BarServer {
+    rpc Request (RequestInput) returns (RequestOutput) {
+    }
+}
+
+message RequestInput {
+    SomeModel data = 1;
+}
+message RequestOutput {}

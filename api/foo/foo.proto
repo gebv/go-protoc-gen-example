@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package foo;
+
+import "api/bar/models.proto";
+
+service FooServer {
+    rpc Request (RequestInput) returns (RequestOutput) {
+    }
+}
+
+message RequestInput {
+    string a = 1;
+    int64 b = 2;
+    bar.SomeModel data =3;
+}
+message RequestOutput {}
