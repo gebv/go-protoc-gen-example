@@ -4,12 +4,8 @@
 package bar
 
 import (
-	context "context"
 	fmt "fmt"
 	proto "github.com/gogo/protobuf/proto"
-	grpc "google.golang.org/grpc"
-	codes "google.golang.org/grpc/codes"
-	status "google.golang.org/grpc/status"
 	io "io"
 	math "math"
 	math_bits "math/bits"
@@ -132,86 +128,6 @@ var fileDescriptor_54dcc294bbf6f45a = []byte{
 	0xb2, 0x10, 0x44, 0xbb, 0x12, 0x83, 0x13, 0xcf, 0x89, 0x47, 0x72, 0x8c, 0x17, 0x1e, 0xc9, 0x31,
 	0x3e, 0x78, 0x24, 0xc7, 0x98, 0xc4, 0x06, 0x76, 0x9a, 0x31, 0x20, 0x00, 0x00, 0xff, 0xff, 0x70,
 	0xd8, 0xf7, 0x74, 0xca, 0x00, 0x00, 0x00,
-}
-
-// Reference imports to suppress errors if they are not otherwise used.
-var _ context.Context
-var _ grpc.ClientConn
-
-// This is a compile-time assertion to ensure that this generated file
-// is compatible with the grpc package it is being compiled against.
-const _ = grpc.SupportPackageIsVersion4
-
-// BarServerClient is the client API for BarServer service.
-//
-// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
-type BarServerClient interface {
-	Request(ctx context.Context, in *RequestInput, opts ...grpc.CallOption) (*RequestOutput, error)
-}
-
-type barServerClient struct {
-	cc *grpc.ClientConn
-}
-
-func NewBarServerClient(cc *grpc.ClientConn) BarServerClient {
-	return &barServerClient{cc}
-}
-
-func (c *barServerClient) Request(ctx context.Context, in *RequestInput, opts ...grpc.CallOption) (*RequestOutput, error) {
-	out := new(RequestOutput)
-	err := c.cc.Invoke(ctx, "/bar.BarServer/Request", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// BarServerServer is the server API for BarServer service.
-type BarServerServer interface {
-	Request(context.Context, *RequestInput) (*RequestOutput, error)
-}
-
-// UnimplementedBarServerServer can be embedded to have forward compatible implementations.
-type UnimplementedBarServerServer struct {
-}
-
-func (*UnimplementedBarServerServer) Request(ctx context.Context, req *RequestInput) (*RequestOutput, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Request not implemented")
-}
-
-func RegisterBarServerServer(s *grpc.Server, srv BarServerServer) {
-	s.RegisterService(&_BarServer_serviceDesc, srv)
-}
-
-func _BarServer_Request_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RequestInput)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BarServerServer).Request(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/bar.BarServer/Request",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BarServerServer).Request(ctx, req.(*RequestInput))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-var _BarServer_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "bar.BarServer",
-	HandlerType: (*BarServerServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "Request",
-			Handler:    _BarServer_Request_Handler,
-		},
-	},
-	Streams:  []grpc.StreamDesc{},
-	Metadata: "api/bar/bar.proto",
 }
 
 func (m *RequestInput) Marshal() (dAtA []byte, err error) {

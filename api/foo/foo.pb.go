@@ -4,9 +4,9 @@
 package foo
 
 import (
-	bar "api/bar"
 	context "context"
 	fmt "fmt"
+	bar "github.com/gebv/go-protoc-gen-example/api/bar"
 	proto "github.com/gogo/protobuf/proto"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
