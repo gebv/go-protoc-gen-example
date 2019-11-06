@@ -1,4 +1,5 @@
 PROTOC := protoc --proto_path=./ --gogofast_out=plugins=grpc:.
+# PROTOC := protoc -I. --gogofast_out=plugins=grpc:.
 
 init:
 	go install -v ./vendor/github.com/gogo/protobuf/protoc-gen-gogofast
