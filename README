@@ -1,0 +1,14 @@
+При запуске main.go ошибка `cannot find package "api/bar"`. Что ожидаемое. Потому что в `api/foo/foo.proto` импортируется proto из `api/bar/models.proto`.
+
+Как правильно указать путь к proto файлу в другой дириктории в рамках одного и того же проекта так что бы сгенеренный го-код имел валидный импорт?
+
+
+```
+MacBook-Pro-George:go-protoc-gen-example gebv$ make run
+go run cmd/main.go
+api/foo/foo.pb.go:7:2: cannot find package "api/bar" in any of:
+	/Users/gebv/go/src/github.com/gebv/go-protoc-gen-example/vendor/api/bar (vendor tree)
+	/usr/local/Cellar/go/1.13.4/libexec/src/api/bar (from $GOROOT)
+	/Users/gebv/go/src/api/bar (from $GOPATH)
+make: *** [run] Error 1
+```
